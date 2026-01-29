@@ -1,84 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sprout, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import './Header.css';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // FIX: Check if we are on the Home page
-  const isHomePage = location.pathname === '/';
+  const navItems = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About Us' },
+    { path: '/products', label: 'Products' },
+    { path: '/services', label: 'Services' },
+    { path: '/investor', label: 'Investor' },
+    { path: '/contact', label: 'Contact' }
+  ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // FIX: Logic to determine if header should be transparent or solid
-  // If we are NOT on home page, OR if we have scrolled, make it solid.
-  const isSolid = scrolled || !isHomePage;
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <header className={`network-header ${isSolid ? 'scrolled' : ''}`}>
-      <div className="container header-container">
-        
-        {/* Logo */}
-        <Link to="/" className="logo-wrapper">
-          <div className="logo-icon-bg">
-            <Sprout size={24} className="logo-icon" />
-          </div>
+    <header className="network-header">
+      <div className="nav-wrapper">
+        <Link to="/" className="network-logo">
           <span className="logo-text">NYOM</span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="desktop-nav">
-          <ul className="nav-list">
-            {[
-              { path: '/', label: 'Home' },
-              { path: '/about', label: 'About Us' },
-              { path: '/services', label: 'Services' },
-              { path: '/contact', label: 'Contact' }
-            ].map((item) => (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Actions */}
-        <div className="header-actions">
-          <Link to="/contact" className="btn-header">
-            Contact Us <ArrowRight size={16} />
+        {/* Desktop Navigation */}
+        <nav className="network-nav desktop-nav">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`network-nav-link ${isActive(item.path) ? 'active' : ''}`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link to="/contact" className="btn-cta-small">
+            Start Your Export Journey
           </Link>
-          <button
-            className="mobile-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${mobileMenuOpen ? 'is-open' : ''}`}>
-        <nav className="mobile-nav-content">
-          <Link to="/" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-          <Link to="/about" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>About</Link>
-          <Link to="/services" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Services</Link>
-          <Link to="/contact" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <nav className="mobile-nav">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`mobile-nav-link ${isActive(item.path) ? 'active' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            to="/contact"
+            className="btn-primary mobile-cta"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Start Your Export Journey
+          </Link>
         </nav>
-      </div>
+      )}
     </header>
   );
 };
