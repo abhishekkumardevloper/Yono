@@ -1,15 +1,12 @@
-/* --- Variables (Matching Home.css) --- */
 :root {
   --header-height: 80px;
-  --primary: #0f172a;    /* Deep Navy */
-  --secondary: #059669;  /* Emerald Green */
-  --accent: #f59e0b;     /* Amber */
+  --primary: #0f172a;
+  --secondary: #059669;
   --white: #ffffff;
   --glass: rgba(255, 255, 255, 0.95);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* --- Base Header --- */
+/* Base Header - Default State (Transparent) */
 .network-header {
   position: fixed;
   top: 0;
@@ -17,9 +14,17 @@
   width: 100%;
   height: var(--header-height);
   z-index: 1000;
-  transition: all 0.4s ease;
-  background-color: transparent; /* Starts transparent over hero image */
-  color: var(--white); /* Text starts white for contrast on dark hero */
+  transition: all 0.3s ease;
+  background-color: transparent; 
+  color: var(--white); /* White text for Hero Image */
+}
+
+/* Scrolled / Solid State */
+.network-header.scrolled {
+  background-color: var(--glass);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  color: var(--primary); /* FIX: Text turns DARK so it is visible on white pages */
 }
 
 .header-container {
@@ -27,24 +32,16 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  padding: 0 20px; /* Safety padding */
 }
 
-/* --- Scrolled State (The "Sticky" Effect) --- */
-.network-header.scrolled {
-  background-color: var(--glass);
-  backdrop-filter: blur(12px); /* Frosted glass effect */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  height: 70px; /* Shrinks slightly on scroll */
-  color: var(--primary); /* Text turns dark */
-}
-
-/* --- Logo --- */
+/* Logo Styling */
 .logo-wrapper {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
-  color: inherit; /* Inherits from header state */
+  color: inherit; /* Inherits white or dark based on parent */
 }
 
 .logo-icon-bg {
@@ -56,28 +53,20 @@
   align-items: center;
   justify-content: center;
   color: var(--white);
-  transition: transform 0.3s ease;
-}
-
-.logo-wrapper:hover .logo-icon-bg {
-  transform: rotate(10deg);
 }
 
 .logo-text {
   font-size: 1.5rem;
   font-weight: 800;
-  letter-spacing: -0.5px;
 }
 
-/* --- Desktop Nav --- */
-.desktop-nav {
-  display: none; /* Hidden on mobile */
-}
+/* Navigation Links */
+.desktop-nav { display: none; } /* Hidden on mobile */
 
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 2.5rem;
+  gap: 2rem;
   margin: 0;
   padding: 0;
 }
@@ -85,34 +74,17 @@
 .nav-link {
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.95rem;
-  color: inherit; /* Inherits white or dark based on scroll */
+  color: inherit; /* This is Crucial: Inherits color from .network-header */
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--secondary);
-  transition: width 0.3s ease;
+.nav-link:hover, .nav-link.active {
+  color: var(--secondary);
 }
 
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
-
-/* --- Header Actions (Button & Hamburger) --- */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
+/* Header Buttons */
+.header-actions { display: flex; gap: 1rem; align-items: center; }
 
 .btn-header {
   background-color: var(--secondary);
@@ -121,53 +93,43 @@
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
-  display: none; /* Hidden on mobile */
+  display: none;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.btn-header:hover {
-  background-color: #047857; /* Darker Green */
-  transform: translateY(-2px);
-  gap: 0.75rem; /* Slide arrow effect */
 }
 
 .mobile-toggle {
   background: none;
   border: none;
   cursor: pointer;
-  color: inherit;
-  display: block;
+  color: inherit; /* Fix: Hamburger icon changes color with text */
 }
 
-/* --- Mobile Menu Overlay --- */
+/* Mobile Menu Overlay */
 .mobile-menu {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 0; /* Hidden by default */
+  height: 0;
   background-color: var(--white);
   overflow: hidden;
-  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 999; /* Below header */
+  transition: height 0.4s ease;
+  z-index: 999;
   padding-top: 0;
 }
 
 .mobile-menu.is-open {
   height: 100vh;
-  padding-top: var(--header-height);
+  padding-top: var(--header-height); /* Push content down below header */
 }
 
 .mobile-nav-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 80%;
   gap: 2rem;
+  padding-top: 2rem;
 }
 
 .mobile-link {
@@ -177,32 +139,8 @@
   text-decoration: none;
 }
 
-.mobile-link.active {
-  color: var(--secondary);
-}
-
-.mobile-cta-btn {
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  margin-top: 1rem;
-}
-
-/* --- Media Queries --- */
 @media (min-width: 992px) {
-  .desktop-nav {
-    display: block;
-  }
-  .btn-header {
-    display: inline-flex;
-  }
-  .mobile-toggle {
-    display: none;
-  }
-  .mobile-menu {
-    display: none; /* Never show mobile menu on desktop */
-  }
+  .desktop-nav { display: block; }
+  .btn-header { display: inline-flex; }
+  .mobile-toggle { display: none; }
 }
