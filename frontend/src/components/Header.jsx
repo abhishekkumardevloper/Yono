@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sprout, ArrowRight } from 'lucide-react'; // Added Sprout icon for agri-theme
+import { Menu, X, Sprout, ArrowRight } from 'lucide-react';
 import './Header.css';
 
 const Header = () => {
@@ -8,7 +8,9 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Handle scroll effect
+  // FIX: Check if we are on the Home page
+  const isHomePage = location.pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -17,22 +19,15 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About Us' },
-    { path: '/products', label: 'Products' },
-    { path: '/services', label: 'Services' },
-    { path: '/investor', label: 'Investor' },
-  ];
-
-  const isActive = (path) => location.pathname === path;
+  // FIX: Logic to determine if header should be transparent or solid
+  // If we are NOT on home page, OR if we have scrolled, make it solid.
+  const isSolid = scrolled || !isHomePage;
 
   return (
-    // Header class changes based on scroll state
-    <header className={`network-header ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`network-header ${isSolid ? 'scrolled' : ''}`}>
       <div className="container header-container">
         
-        {/* Logo Section */}
+        {/* Logo */}
         <Link to="/" className="logo-wrapper">
           <div className="logo-icon-bg">
             <Sprout size={24} className="logo-icon" />
@@ -40,14 +35,19 @@ const Header = () => {
           <span className="logo-text">NYOM</span>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav className="desktop-nav">
           <ul className="nav-list">
-            {navItems.map((item) => (
+            {[
+              { path: '/', label: 'Home' },
+              { path: '/about', label: 'About Us' },
+              { path: '/services', label: 'Services' },
+              { path: '/contact', label: 'Contact' }
+            ].map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
+                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
                 >
                   {item.label}
                 </Link>
@@ -56,43 +56,27 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Right Side Actions */}
+        {/* Actions */}
         <div className="header-actions">
           <Link to="/contact" className="btn-header">
-            Contact Us <ArrowRight size={16} className="btn-arrow" />
+            Contact Us <ArrowRight size={16} />
           </Link>
-
-          {/* Mobile Toggle */}
           <button
             className="mobile-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'is-open' : ''}`}>
         <nav className="mobile-nav-content">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`mobile-link ${isActive(item.path) ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            to="/contact"
-            className="mobile-cta-btn"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Start Your Export Journey
-          </Link>
+          <Link to="/" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+          <Link to="/about" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>About</Link>
+          <Link to="/services" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Services</Link>
+          <Link to="/contact" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
         </nav>
       </div>
     </header>
