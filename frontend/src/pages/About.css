@@ -1,0 +1,111 @@
+.about-page {
+  padding-top: 100px;
+}
+
+.page-hero {
+  background: var(--bg-subtle);
+  padding: var(--spacing-giant) 0;
+  text-align: center;
+}
+
+.page-hero h1 {
+  margin-bottom: var(--spacing-small);
+}
+
+.about-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-content h2 {
+  margin-bottom: var(--spacing-medium);
+}
+
+.about-content p {
+  margin-bottom: var(--spacing-medium);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-large);
+  margin-top: var(--spacing-large);
+}
+
+.value-card {
+  padding: var(--spacing-large);
+  text-align: center;
+}
+
+.value-icon {
+  color: var(--brand-hover);
+  margin-bottom: var(--spacing-medium);
+}
+
+.value-card h3 {
+  margin-bottom: var(--spacing-small);
+}
+
+.what-we-do {
+  max-width: 900px;
+  margin: var(--spacing-large) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+}
+
+.wwd-item h3 {
+  margin-bottom: var(--spacing-small);
+}
+
+.transparency-box {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-giant);
+}
+
+.transparency-box h2 {
+  margin-bottom: var(--spacing-medium);
+  text-align: center;
+}
+
+.transparency-box > p {
+  margin-bottom: var(--spacing-medium);
+}
+
+.transparency-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-large) 0;
+}
+
+.transparency-list li {
+  padding: var(--spacing-small);
+  margin-bottom: var(--spacing-small);
+  background: var(--bg-subtle);
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.disclaimer-box {
+  background: #fff3cd;
+  border-left: 4px solid var(--brand-dark);
+  padding: var(--spacing-medium);
+  border-radius: 8px;
+  margin-top: var(--spacing-large);
+}
+
+@media (max-width: 781px) {
+  .about-page {
+    padding-top: 70px;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transparency-box {
+    padding: var(--spacing-large);
+  }
+}

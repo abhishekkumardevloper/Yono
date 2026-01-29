@@ -1,0 +1,132 @@
+.products-page {
+  padding-top: 100px;
+}
+
+.products-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-giant);
+  align-items: center;
+}
+
+.products-hero-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0, 69, 52, 0.1);
+}
+
+.products-content h2 {
+  margin-bottom: var(--spacing-medium);
+}
+
+.product-category {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  margin-bottom: var(--spacing-small);
+}
+
+.category-icon {
+  color: var(--brand-hover);
+}
+
+.category-description {
+  margin-bottom: var(--spacing-large);
+  color: var(--text-secondary);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--spacing-medium);
+}
+
+.product-card {
+  padding: var(--spacing-medium);
+  text-align: center;
+}
+
+.product-card h3 {
+  font-size: 18px;
+}
+
+.quality-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-giant);
+  text-align: center;
+}
+
+.quality-icon {
+  color: var(--brand-hover);
+  margin-bottom: var(--spacing-medium);
+}
+
+.quality-section h2 {
+  margin-bottom: var(--spacing-large);
+}
+
+.quality-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-large);
+  margin-top: var(--spacing-large);
+  text-align: left;
+}
+
+.quality-item h3 {
+  margin-bottom: var(--spacing-small);
+}
+
+.products-note {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-large);
+  background: var(--bg-card);
+  border-radius: 16px;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .products-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .products-hero-image {
+    height: 300px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 781px) {
+  .products-page {
+    padding-top: 70px;
+  }
+
+  .category-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .quality-section {
+    padding: var(--spacing-large);
+  }
+
+  .quality-features {
+    grid-template-columns: 1fr;
+  }
+}
