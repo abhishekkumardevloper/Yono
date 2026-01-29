@@ -1,154 +1,208 @@
-.network-header {
-  background: var(--bg-page);
-  position: fixed;
-  top: 32px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 999;
-  padding: 0 12px;
+/* --- Variables (Matching Home.css) --- */
+:root {
+  --header-height: 80px;
+  --primary: #0f172a;    /* Deep Navy */
+  --secondary: #059669;  /* Emerald Green */
+  --accent: #f59e0b;     /* Amber */
+  --white: #ffffff;
+  --glass: rgba(255, 255, 255, 0.95);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.nav-wrapper {
-  max-width: 1440px;
-  margin: 0 auto;
-  background: var(--brand-dark);
-  border-radius: 25px;
-  padding: 8px 16px;
+/* --- Base Header --- */
+.network-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 1000;
+  transition: all 0.4s ease;
+  background-color: transparent; /* Starts transparent over hero image */
+  color: var(--white); /* Text starts white for contrast on dark hero */
+}
+
+.header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 69, 52, 0.25);
+  height: 100%;
 }
 
-.network-logo {
-  text-decoration: none;
+/* --- Scrolled State (The "Sticky" Effect) --- */
+.network-header.scrolled {
+  background-color: var(--glass);
+  backdrop-filter: blur(12px); /* Frosted glass effect */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  height: 70px; /* Shrinks slightly on scroll */
+  color: var(--primary); /* Text turns dark */
+}
+
+/* --- Logo --- */
+.logo-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit; /* Inherits from header state */
+}
+
+.logo-icon-bg {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  transition: transform 0.3s ease;
+}
+
+.logo-wrapper:hover .logo-icon-bg {
+  transform: rotate(10deg);
 }
 
 .logo-text {
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 1px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
-.network-nav {
+/* --- Desktop Nav --- */
+.desktop-nav {
+  display: none; /* Hidden on mobile */
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: inherit; /* Inherits white or dark based on scroll */
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--secondary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* --- Header Actions (Button & Hamburger) --- */
+.header-actions {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
-.network-nav-link {
-  color: white;
+.btn-header {
+  background-color: var(--secondary);
+  color: var(--white);
+  padding: 0.6rem 1.25rem;
+  border-radius: 50px;
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 20px;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: none; /* Hidden on mobile */
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-.network-nav-link:hover,
-.network-nav-link.active {
-  background: rgba(255, 255, 255, 0.1);
+.btn-header:hover {
+  background-color: #047857; /* Darker Green */
+  transform: translateY(-2px);
+  gap: 0.75rem; /* Slide arrow effect */
 }
 
-.btn-cta-small {
-  background: var(--brand-primary);
-  color: var(--brand-dark);
+.mobile-toggle {
+  background: none;
   border: none;
-  border-radius: 25px;
-  padding: 10px 20px;
-  font-size: 14px;
+  cursor: pointer;
+  color: inherit;
+  display: block;
+}
+
+/* --- Mobile Menu Overlay --- */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0; /* Hidden by default */
+  background-color: var(--white);
+  overflow: hidden;
+  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 999; /* Below header */
+  padding-top: 0;
+}
+
+.mobile-menu.is-open {
+  height: 100vh;
+  padding-top: var(--header-height);
+}
+
+.mobile-nav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  gap: 2rem;
+}
+
+.mobile-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.mobile-link.active {
+  color: var(--secondary);
+}
+
+.mobile-cta-btn {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
-  white-space: nowrap;
+  margin-top: 1rem;
 }
 
-.btn-cta-small:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(211, 255, 98, 0.3);
-}
-
-/* Mobile Menu */
-.mobile-menu-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 8px;
-}
-
-.desktop-nav {
-  display: flex;
-}
-
-.mobile-nav {
-  display: none;
-}
-
-/* Mobile Responsive */
-@media (max-width: 1024px) {
-  .network-header {
-    top: 0;
-    padding: 0;
-  }
-
-  .nav-wrapper {
-    border-radius: 0;
-    padding: 12px 16px;
-  }
-
+/* --- Media Queries --- */
+@media (min-width: 992px) {
   .desktop-nav {
-    display: none;
-  }
-
-  .mobile-menu-btn {
     display: block;
   }
-
-  .mobile-nav {
-    display: flex;
-    flex-direction: column;
-    background: var(--brand-dark);
-    padding: 16px;
-    gap: 8px;
-    animation: slideDown 0.3s ease;
+  .btn-header {
+    display: inline-flex;
   }
-
-  .mobile-nav-link {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 12px 16px;
-    border-radius: 12px;
-    transition: all 0.2s ease;
+  .mobile-toggle {
+    display: none;
   }
-
-  .mobile-nav-link:hover,
-  .mobile-nav-link.active {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .mobile-cta {
-    margin-top: 8px;
-    text-align: center;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .mobile-menu {
+    display: none; /* Never show mobile menu on desktop */
   }
 }
