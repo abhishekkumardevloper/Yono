@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Globe, ShieldCheck, TrendingUp, Users, CheckCircle, ArrowRight, Anchor } from 'lucide-react';
+import { Globe, ShieldCheck, TrendingUp, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import './Home.css';
 
 const Home = () => {
@@ -15,29 +15,29 @@ const Home = () => {
 
   const services = [
     {
-      icon: <Globe size={40} className="text-primary" />,
+      icon: <Globe size={40} />,
       title: 'Direct Export',
-      description: 'End-to-end supply chain management of fresh Indian produce to international hubs.'
+      description: 'End-to-end export of fresh fruits & vegetables to global markets'
     },
     {
-      icon: <Users size={40} className="text-primary" />,
+      icon: <Users size={40} />,
       title: 'Business Partnership',
-      description: 'Transparent fixed-profit models designed for traders and investors.'
+      description: 'Fixed profit export–import business model with transparent operations'
     },
     {
-      icon: <ShieldCheck size={40} className="text-primary" />,
+      icon: <ShieldCheck size={40} />,
       title: 'Trade Support',
-      description: 'Handling complex documentation, customs compliance, and logistics coordination.'
+      description: 'Complete documentation, logistics & payment coordination'
     }
   ];
 
   const whyChoose = [
-    { title: 'Expert Team', desc: 'Veterans in agri-export trade.' },
-    { title: 'Global Routes', desc: 'Active channels to 6+ countries.' },
-    { title: 'Transparency', desc: '100% visibility on operations.' },
-    { title: 'Quality First', desc: 'Premium export-grade standards.' },
-    { title: 'On-Time', desc: 'Optimized logistics network.' },
-    { title: 'Best Pricing', desc: 'Direct-from-farm procurement.' }
+    'Experienced Export Team',
+    'Active Global Trade Routes',
+    'Ethical & Transparent Practices',
+    'Quality Assurance Standards',
+    'Timely Delivery',
+    'Competitive Pricing'
   ];
 
   return (
@@ -46,81 +46,67 @@ const Home = () => {
       <section className="hero-section">
         <div className="hero-overlay"></div>
         <div className="hero-content container">
-          <div className="hero-text-wrapper fade-in-up">
-            <span className="hero-badge">Global Agri-Export Leaders</span>
-            <h1 className="hero-title">Connecting Indian Harvests to the World</h1>
-            <p className="hero-description">
-              NYOM is a premier export–import firm bridging the gap between Indian farmers and global markets with professionalism and trust.
-            </p>
-            <div className="hero-buttons">
-              <Link to="/contact" className="btn btn-primary">
-                Start Trading
-              </Link>
-              <Link to="/services" className="btn btn-outline">
-                Explore Services
-              </Link>
-            </div>
-          </div>
+          <h1 className="hero-title display-large fade-in">NYOM</h1>
+          <p className="hero-subtitle heading-2 fade-in">Trusted Fresh Fruits & Vegetables Exporter</p>
+          <p className="hero-description body-large fade-in">
+            Professional export–import company supplying global markets with export-grade Indian produce
+          </p>
+          <Link to="/contact" className="btn-primary btn-hero fade-in">
+            Start Your Export–Import Journey
+          </Link>
         </div>
       </section>
 
       {/* Company Overview */}
-      <section className="section-padding" id="about">
+      <section className="section-padding">
         <div className="container">
           <div className="two-column-layout">
             <div className="content-column">
-              <h4 className="section-label">Who We Are</h4>
-              <h2 className="section-heading">Redefining International Trade</h2>
-              <p className="body-large text-muted">
-                NYOM isn't just an exporter; we are your strategic trade partner. We specialize in the procurement and export of premium fresh fruits and vegetables, ensuring compliance with rigorous international standards.
+              <h2 className="heading-1">Company Overview</h2>
+              <p className="body-large section-text">
+                NYOM is a professional export–import company specializing in fresh fruits and vegetables. We execute real international trade and offer structured partnership opportunities for exporters, traders, and investors.
               </p>
-              
+              <p className="body-medium section-text">
+                Our focus is on transparency, compliance, and meeting global demand with premium quality Indian agricultural produce.
+              </p>
               <div className="feature-list">
                 <div className="feature-item">
-                  <div className="icon-box"><Anchor size={20} /></div>
-                  <div>
-                    <strong>Real Trade Execution</strong>
-                    <p className="text-sm">Tangible goods, real logistics, actual profits.</p>
-                  </div>
+                  <CheckCircle size={24} className="feature-icon" />
+                  <span>Real International Trade Execution</span>
                 </div>
                 <div className="feature-item">
-                  <div className="icon-box"><Users size={20} /></div>
-                  <div>
-                    <strong>Structured Partnerships</strong>
-                    <p className="text-sm">Clear agreements for investors and partners.</p>
-                  </div>
+                  <CheckCircle size={24} className="feature-icon" />
+                  <span>Structured Partnership Opportunities</span>
+                </div>
+                <div className="feature-item">
+                  <CheckCircle size={24} className="feature-icon" />
+                  <span>Full Compliance & Transparency</span>
                 </div>
               </div>
             </div>
             <div className="image-column">
-              <div className="image-wrapper">
-                <img 
-                  src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Global Shipping and Logistics" 
-                  className="section-image"
-                />
-                <div className="floating-card">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Quality Assurance</span>
-                </div>
-              </div>
+              <img 
+                src="https://images.unsplash.com/photo-1604778247403-72353f38c499?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHw0fHxleHBvcnQlMjB0cmFkZXxlbnwwfHx8fDE3Njk2NzY5OTd8MA&ixlib=rb-4.1.0&q=85" 
+                alt="Global Trade"
+                className="section-image"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Export Markets */}
-      <section className="section-padding bg-light">
+      <section className="section-padding bg-subtle">
         <div className="container">
-          <div className="section-header text-center">
-            <h2 className="section-heading">Global Footprint</h2>
-            <p className="section-subtitle">Delivering freshness to premium markets worldwide</p>
-          </div>
+          <h2 className="heading-1 text-center">Our Export Markets</h2>
+          <p className="body-large text-center section-subtitle">
+            Serving premium markets across the globe
+          </p>
           <div className="markets-grid">
             {exportMarkets.map((market, index) => (
-              <div key={index} className="market-card">
-                <div className="flag-circle">{market.flag}</div>
-                <h3 className="market-name">{market.country}</h3>
+              <div key={index} className="market-card network-card">
+                <div className="market-flag">{market.flag}</div>
+                <h3 className="heading-3">{market.country}</h3>
               </div>
             ))}
           </div>
@@ -130,57 +116,55 @@ const Home = () => {
       {/* Services Overview */}
       <section className="section-padding">
         <div className="container">
-          <div className="section-header text-center">
-            <h2 className="section-heading">Our Expertise</h2>
-            <p className="section-subtitle">Comprehensive solutions for the modern supply chain</p>
-          </div>
+          <h2 className="heading-1 text-center">Our Services</h2>
+          <p className="body-large text-center section-subtitle">
+            Comprehensive export–import solutions
+          </p>
           <div className="services-grid">
             {services.map((service, index) => (
-              <div key={index} className="service-card">
-                <div className="service-icon-wrapper">{service.icon}</div>
-                <h3 className="service-title">{service.title}</h3>
-                <p className="service-desc">{service.description}</p>
-                <Link to="/services" className="link-arrow">Learn more <ArrowRight size={16} /></Link>
+              <div key={index} className="service-card network-card">
+                <div className="service-icon">{service.icon}</div>
+                <h3 className="heading-3">{service.title}</h3>
+                <p className="body-medium">{service.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Fixed Profit Model (Highlighted Section) */}
-      <section className="section-padding bg-dark text-white pattern-bg">
+      {/* Fixed Profit Model */}
+      <section className="section-padding bg-subtle">
         <div className="container">
-          <div className="profit-layout">
-            <div className="profit-info">
-              <h2 className="heading-light">Fixed Profit Business Model</h2>
-              <p className="text-light-muted">
-                Looking for a secure entry into the export business? Our partnership model offers structured returns backed by real agricultural trade.
+          <div className="profit-model-card network-card">
+            <div className="profit-content">
+              <h2 className="heading-1">Fixed Profit Business Model</h2>
+              <p className="body-large">
+                Participate in real export–import trade with structured returns
               </p>
-              <div className="profit-tags">
-                <span className="tag">Transparent Operations</span>
-                <span className="tag">Legal Agreements</span>
-                <span className="tag">Monthly Payouts</span>
+              <div className="profit-highlights">
+                <div className="profit-stat">
+                  <TrendingUp size={32} className="stat-icon" />
+                  <div>
+                    <div className="stat-value">2%</div>
+                    <div className="stat-label">Indicative Monthly Returns</div>
+                  </div>
+                </div>
+                <div className="profit-stat">
+                  <TrendingUp size={32} className="stat-icon" />
+                  <div>
+                    <div className="stat-value">24%</div>
+                    <div className="stat-label">Indicative Annual Returns</div>
+                  </div>
+                </div>
+              </div>
+              <div className="profit-features">
+                <div className="feature-badge">Clear Agreements</div>
+                <div className="feature-badge">Transparent Operations</div>
+                <div className="feature-badge">Real Trade Participation</div>
               </div>
               <p className="disclaimer-text">
-                *Disclaimer: Returns are indicative and subject to market terms.
+                <strong>Disclaimer:</strong> Returns are indicative and subject to market risks.
               </p>
-            </div>
-            
-            <div className="profit-stats-container">
-              <div className="stat-card glass-effect">
-                <TrendingUp size={32} className="text-accent" />
-                <div className="stat-data">
-                  <span className="stat-value">2%</span>
-                  <span className="stat-desc">Monthly ROI</span>
-                </div>
-              </div>
-              <div className="stat-card glass-effect">
-                <TrendingUp size={32} className="text-accent" />
-                <div className="stat-data">
-                  <span className="stat-value">24%</span>
-                  <span className="stat-desc">Annual ROI</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -189,17 +173,12 @@ const Home = () => {
       {/* Why Choose NYOM */}
       <section className="section-padding">
         <div className="container">
-          <div className="section-header text-center">
-            <h2 className="section-heading">Why Choose NYOM?</h2>
-          </div>
+          <h2 className="heading-1 text-center">Why Choose NYOM</h2>
           <div className="why-choose-grid">
-            {whyChoose.map((item, index) => (
-              <div key={index} className="feature-box">
-                <CheckCircle size={24} className="check-icon" />
-                <div>
-                  <h3 className="feature-title">{item.title}</h3>
-                  <p className="feature-desc">{item.desc}</p>
-                </div>
+            {whyChoose.map((reason, index) => (
+              <div key={index} className="why-card network-card">
+                <CheckCircle size={32} className="why-icon" />
+                <h3 className="heading-3">{reason}</h3>
               </div>
             ))}
           </div>
@@ -209,13 +188,11 @@ const Home = () => {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
-          <div className="cta-box">
-            <div className="cta-content">
-              <h2 className="cta-heading">Ready to Expand Your Business?</h2>
-              <p className="cta-text">Join NYOM in bridging the gap between Indian farms and global plates.</p>
-            </div>
-            <Link to="/contact" className="btn btn-white">
-              Contact Us Today <ArrowRight size={20} />
+          <div className="cta-card network-card">
+            <h2 className="heading-1">Start Your Export–Import Journey Today</h2>
+            <p className="body-large">Join us in serving global markets with premium Indian produce</p>
+            <Link to="/contact" className="btn-primary btn-cta">
+              Contact NYOM <ArrowRight size={20} />
             </Link>
           </div>
         </div>
